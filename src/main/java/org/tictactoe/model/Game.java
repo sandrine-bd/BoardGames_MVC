@@ -1,52 +1,57 @@
-package org.tictactoe;
+package org.tictactoe.model;
 
-import java.util.Random;
+public abstract class Game {
+    public Cell[][] board;
+    public Player player1;
+    public Player player2;
+    public Player currentPlayer;
 
-public class Game {
-    protected Cell[][] board;
-    private Player player1;
-    private Player player2;
-    private Player currentPlayer;
+    public Game(int size, Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.currentPlayer = player1;
+        this.board = new Cell[size][size];
+        initializeBoard();
+    }
 
     public void initializeBoard() {
-        for (int i = 0; i < size[0]; i++) {
-            for (int j = 0; j < size[1]; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = new Cell();
             }
         }
     }
 
     public void setOwner(int row, int col, Player player) {
-        board[row][col].setState(player.getRepresentation());
+        board[row][col].setState(player.getSymbol());
     }
 
-    public boolean isBoardFull() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].isEmpty()) {
-                    return false; // s'il y a une case vide = plateau non plein
-                }
-            }
-        } return true; // aucune case vidé trouvée = plateau plein
+    public boolean isCellEmpty(int row, int col) {
+        if (row < 0 || row >= board.length || col < 0 || col >= board.length) {
+            throw new IllegalArgumentException("Coordonnées hors du plateau !");
+        }
+        return board[row][col].isEmpty(); // renvoie true si la case ne contient pas de symbole
     }
 
     public boolean isWinner(Player player) {
         return false;
     }
 
-    public int[] getMoveFromPlayer(Player player) {
-        if (player instanceof HumanPlayer) {
-            return ui.askCellChoice(size, board);
-        }
-        // sinon : joueur artificiel
-        Random rand = new Random();
-        while (true) {
-            int row = rand.nextInt(size[0]); // entre 0 (inclus) et size (exclu)
-            int col = rand.nextInt(size[1]);
-            if (board[row][col].isEmpty()) {
-                System.out.println("L'IA joue en position " + row + " (ligne), " + col + (" (colonne)"));
-                return new int[]{row, col};
+    public boolean isBoardFull() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j].isEmpty()) {
+                    return false;
+                }
             }
+        } return true;
+    }
+
+    public void switchPlayer() {
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+        } else {
+            currentPlayer = player1;
         }
     }
 }
