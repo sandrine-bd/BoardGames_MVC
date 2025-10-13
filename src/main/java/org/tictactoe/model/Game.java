@@ -2,8 +2,8 @@ package org.tictactoe.model;
 
 public abstract class Game {
     public Cell[][] board;
-    public Player player1;
-    public Player player2;
+    private Player player1;
+    private Player player2;
     public Player currentPlayer;
 
     public Game(int size, Player player1, Player player2) {
