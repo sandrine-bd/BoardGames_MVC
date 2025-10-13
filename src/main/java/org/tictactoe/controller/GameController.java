@@ -12,11 +12,20 @@ public class GameController {
     private final Game game;
     private final ConsoleView view;
     private final UserInteraction ui;
+    private GameState state;
+
+    public enum GameState {
+        INIT,
+        PLAYER_TURN,
+        CHECK_WIN,
+        GAME_OVER
+    }
 
     public GameController(Game game, ConsoleView view, UserInteraction ui) {
         this.game = game;
         this.view = view;
         this.ui = ui;
+        this.state = GameState.INIT;
     }
 
     public int[] getMoveFromPlayer (Player player) {
@@ -36,32 +45,47 @@ public class GameController {
     }
 
     public void play() {
-        while (true) {
-            view.displayBoard(game.board);
-            view.displayMessage("\n---- TOUR DU JOUEUR " + game.currentPlayer.getSymbol() + "----");
+        boolean running = true;
 
-            int[] move = getMoveFromPlayer(game.currentPlayer);
+        while (running) {
+            switch (state) {
 
-            if (game.isCellEmpty(move[0], move[1])) {
-                game.setOwner(move[0], move[1], game.currentPlayer);
-            } else {
-                view.displayMessage("Case déjà prise !");
-                continue;
+                case INIT -> {
+                    state = GameState.PLAYER_TURN;
+                }
+
+                case PLAYER_TURN -> {
+                    view.displayBoard(game.board);
+                    view.displayMessage("\n---- TOUR DU JOUEUR " + game.currentPlayer.getSymbol() + "----");
+
+                    int[] move = getMoveFromPlayer(game.currentPlayer);
+
+                    if (game.isCellEmpty(move[0], move[1])) {
+                        game.setOwner(move[0], move[1], game.currentPlayer);
+                        state = GameState.CHECK_WIN;
+                    } else {
+                        view.displayMessage("Case déjà prise !");
+                    }
+                }
+
+                case CHECK_WIN -> {
+                    if (game.isWinner(game.currentPlayer)) {
+                        view.displayMessage("FIN DU JEU ! Le joueur " + game.currentPlayer.getSymbol() + " a gagné !");
+                        state = GameState.GAME_OVER;
+                    } else if (game.isBoardFull()) {
+                        view.displayMessage("MATCH NUL ! Le plateau est plein.");
+                        state = GameState.GAME_OVER;
+                    } else {
+                        game.switchPlayer();
+                        state = GameState.PLAYER_TURN;
+                    }
+                }
+
+                case GAME_OVER -> {
+                    view.displayBoard(game.board);
+                    running = false; // on quitte la boucle
+                }
             }
-
-            if (game.isWinner(game.currentPlayer)) {
-                view.displayMessage("FIN DU JEU ! Le joueur " + game.currentPlayer.getSymbol() + " a gagné !");
-                view.displayBoard(game.board);
-                break;
-            }
-
-            if (game.isBoardFull()) {
-               view.displayMessage("Match nul ! Le plateau est plein.");
-               view.displayBoard(game.board);
-                break;
-            }
-
-            game.switchPlayer();
         }
     }
 }
