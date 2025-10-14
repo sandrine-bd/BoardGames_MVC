@@ -1,4 +1,4 @@
-package org.tictactoe.model;
+package org.tictactoe.model.player;
 
 public class ArtificialPlayer extends Player {
     public ArtificialPlayer(String symbol) {

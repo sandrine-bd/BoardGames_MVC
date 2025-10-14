@@ -1,4 +1,4 @@
-package org.tictactoe.model;
+package org.tictactoe.model.player;
 
 public class HumanPlayer extends Player {
     public HumanPlayer(String symbol) {

@@ -1,9 +1,9 @@
 package org.tictactoe;
 
 import org.tictactoe.controller.GameController;
-import org.tictactoe.model.Game;
-import org.tictactoe.model.Player;
-import org.tictactoe.model.TicTacToe;
+import org.tictactoe.model.game.Game;
+import org.tictactoe.model.player.Player;
+import org.tictactoe.model.game.TicTacToe;
 import org.tictactoe.view.ConsoleView;
 import org.tictactoe.view.UserInteraction;
 

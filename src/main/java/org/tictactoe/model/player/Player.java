@@ -1,4 +1,4 @@
-package org.tictactoe.model;
+package org.tictactoe.model.player;
 
 public class Player {
     private String symbol;

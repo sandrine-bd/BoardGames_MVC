@@ -1,4 +1,7 @@
-package org.tictactoe.model;
+package org.tictactoe.model.game;
+
+import org.tictactoe.model.Cell;
+import org.tictactoe.model.player.Player;
 
 public abstract class Game {
     public Cell[][] board;

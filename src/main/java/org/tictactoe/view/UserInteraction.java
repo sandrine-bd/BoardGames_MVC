@@ -1,8 +1,8 @@
 package org.tictactoe.view;
 
-import org.tictactoe.model.ArtificialPlayer;
-import org.tictactoe.model.HumanPlayer;
-import org.tictactoe.model.Player;
+import org.tictactoe.model.player.ArtificialPlayer;
+import org.tictactoe.model.player.HumanPlayer;
+import org.tictactoe.model.player.Player;
 
 import java.util.Scanner;
 
