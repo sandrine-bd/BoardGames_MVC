@@ -1,10 +1,15 @@
-package org.boardgames.model.game;
+package org.boardgames.model.tictactoe;
 
+import org.boardgames.model.Game;
 import org.boardgames.model.player.Player;
 
 public class TicTacToe extends Game {
+    protected TicTacToeState state;
+
     public TicTacToe(int size, Player player1, Player player2) {
         super(size, player1, player2);
+        this.state = TicTacToeState.INIT;
+        initializeBoard();
     }
 
     @Override
@@ -52,5 +57,13 @@ public class TicTacToe extends Game {
         } if (diag2Win) return true;
 
         return false;
+    }
+
+    public TicTacToeState getState() {
+        return state;
+    }
+
+    public void setState(TicTacToeState state) {
+        this.state = state;
     }
 }

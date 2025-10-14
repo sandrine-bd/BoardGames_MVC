@@ -1,9 +1,11 @@
 package org.boardgames.view;
 
+import org.boardgames.model.Game;
 import org.boardgames.model.player.ArtificialPlayer;
 import org.boardgames.model.player.HumanPlayer;
 import org.boardgames.model.player.Player;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class UserInteraction {
@@ -55,6 +57,22 @@ public class UserInteraction {
             }
         }
         return new Player[]{player1, player2};
+    }
+
+    public int[] getMoveFromPlayer(Game game, Player player) {
+        if (player instanceof HumanPlayer) {
+            return askCellChoice();
+        } else {
+            Random rand = new Random();
+            int row, col;
+            do {
+                row = rand.nextInt(game.board.length); // entre 0 (inclus) et 3 (exclu)
+                col = rand.nextInt(game.board.length);
+            } while (!game.isCellEmpty(row, col));
+
+            System.out.println("L'IA joue en position " + row + " (ligne), " + col + (" (colonne)"));
+            return new int[]{row, col};
+        }
     }
 
     public int[] askCellChoice() {

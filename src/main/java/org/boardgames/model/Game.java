@@ -1,6 +1,5 @@
-package org.boardgames.model.game;
+package org.boardgames.model;
 
-import org.boardgames.model.Cell;
 import org.boardgames.model.player.Player;
 
 public abstract class Game {

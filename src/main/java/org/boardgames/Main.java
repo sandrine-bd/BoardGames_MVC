@@ -1,9 +1,9 @@
 package org.boardgames;
 
 import org.boardgames.controller.GameController;
-import org.boardgames.model.game.Game;
+import org.boardgames.model.Game;
 import org.boardgames.model.player.Player;
-import org.boardgames.model.game.TicTacToe;
+import org.boardgames.model.tictactoe.TicTacToe;
 import org.boardgames.view.ConsoleView;
 import org.boardgames.view.UserInteraction;
 
