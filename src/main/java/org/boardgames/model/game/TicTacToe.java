@@ -1,6 +1,6 @@
-package org.tictactoe.model.game;
+package org.boardgames.model.game;
 
-import org.tictactoe.model.player.Player;
+import org.boardgames.model.player.Player;
 
 public class TicTacToe extends Game {
     public TicTacToe(int size, Player player1, Player player2) {

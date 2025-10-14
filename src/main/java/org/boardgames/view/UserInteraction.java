@@ -1,8 +1,8 @@
-package org.tictactoe.view;
+package org.boardgames.view;
 
-import org.tictactoe.model.player.ArtificialPlayer;
-import org.tictactoe.model.player.HumanPlayer;
-import org.tictactoe.model.player.Player;
+import org.boardgames.model.player.ArtificialPlayer;
+import org.boardgames.model.player.HumanPlayer;
+import org.boardgames.model.player.Player;
 
 import java.util.Scanner;
 

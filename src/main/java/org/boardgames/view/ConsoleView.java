@@ -1,6 +1,6 @@
-package org.tictactoe.view;
+package org.boardgames.view;
 
-import org.tictactoe.model.Cell;
+import org.boardgames.model.Cell;
 
 public class ConsoleView {
     public void displayBoard(Cell[][] board) {

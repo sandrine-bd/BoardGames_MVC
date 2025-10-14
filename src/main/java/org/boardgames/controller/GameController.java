@@ -1,10 +1,10 @@
-package org.tictactoe.controller;
+package org.boardgames.controller;
 
-import org.tictactoe.model.game.Game;
-import org.tictactoe.model.player.HumanPlayer;
-import org.tictactoe.model.player.Player;
-import org.tictactoe.view.ConsoleView;
-import org.tictactoe.view.UserInteraction;
+import org.boardgames.model.game.Game;
+import org.boardgames.model.player.HumanPlayer;
+import org.boardgames.model.player.Player;
+import org.boardgames.view.ConsoleView;
+import org.boardgames.view.UserInteraction;
 
 import java.util.Random;
 

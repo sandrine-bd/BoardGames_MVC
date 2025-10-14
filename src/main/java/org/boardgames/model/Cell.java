@@ -1,4 +1,4 @@
-package org.tictactoe.model;
+package org.boardgames.model;
 
 public class Cell {
     private String state;

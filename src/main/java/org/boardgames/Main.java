@@ -1,11 +1,11 @@
-package org.tictactoe;
+package org.boardgames;
 
-import org.tictactoe.controller.GameController;
-import org.tictactoe.model.game.Game;
-import org.tictactoe.model.player.Player;
-import org.tictactoe.model.game.TicTacToe;
-import org.tictactoe.view.ConsoleView;
-import org.tictactoe.view.UserInteraction;
+import org.boardgames.controller.GameController;
+import org.boardgames.model.game.Game;
+import org.boardgames.model.player.Player;
+import org.boardgames.model.game.TicTacToe;
+import org.boardgames.view.ConsoleView;
+import org.boardgames.view.UserInteraction;
 
 public class Main {
     public static void main(String[] args) {
