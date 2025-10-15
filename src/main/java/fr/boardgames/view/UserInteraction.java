@@ -1,9 +1,9 @@
-package org.boardgames.view;
+package fr.boardgames.view;
 
-import org.boardgames.model.Game;
-import org.boardgames.model.player.ArtificialPlayer;
-import org.boardgames.model.player.HumanPlayer;
-import org.boardgames.model.player.Player;
+import fr.boardgames.model.Game;
+import fr.boardgames.model.player.ArtificialPlayer;
+import fr.boardgames.model.player.HumanPlayer;
+import fr.boardgames.model.player.Player;
 
 import java.util.Random;
 import java.util.Scanner;

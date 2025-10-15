@@ -1,4 +1,4 @@
-package org.boardgames.model.player;
+package fr.boardgames.model.player;
 
 public class Player {
     private String symbol;

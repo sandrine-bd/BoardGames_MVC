@@ -1,9 +1,9 @@
-package org.boardgames.model.tictactoe;
+package fr.boardgames.model.tictactoe;
 
-import org.boardgames.model.Game;
-import org.boardgames.model.state.GameStateVisitor;
-import org.boardgames.view.ConsoleView;
-import org.boardgames.view.UserInteraction;
+import fr.boardgames.model.Game;
+import fr.boardgames.model.state.GameStateVisitor;
+import fr.boardgames.view.ConsoleView;
+import fr.boardgames.view.UserInteraction;
 
 public class TicTacToeVisitor implements GameStateVisitor {
     private final ConsoleView view;
@@ -20,7 +20,7 @@ public class TicTacToeVisitor implements GameStateVisitor {
 
         switch (ticTacToe.getState()) {
             case INIT -> {
-                view.displayMessage("---- DÉMARRAGE DU JEU DE TIC TAC TOE ----");
+                view.displayMessage("\nDÉMARRAGE DU JEU DE TIC TAC TOE");
                 ticTacToe.setState(TicTacToeState.PLAYER_TURN);
             }
 
@@ -39,10 +39,10 @@ public class TicTacToeVisitor implements GameStateVisitor {
 
             case CHECK_WIN -> {
                 if (ticTacToe.isWinner(ticTacToe.currentPlayer)) {
-                    view.displayMessage("FIN DU JEU ! Le joueur " + ticTacToe.currentPlayer.getSymbol() + " a gagné !");
+                    view.displayMessage("\nFIN DU JEU ! Le joueur " + ticTacToe.currentPlayer.getSymbol() + " a gagné !");
                     ticTacToe.setState(TicTacToeState.GAME_OVER);
                 } else if (ticTacToe.isBoardFull()) {
-                    view.displayMessage("MATCH NUL ! Le plateau est plein.");
+                    view.displayMessage("\nMATCH NUL ! Le plateau est plein.");
                     ticTacToe.setState(TicTacToeState.GAME_OVER);
                 } else {
                     ticTacToe.switchPlayer();
@@ -51,7 +51,6 @@ public class TicTacToeVisitor implements GameStateVisitor {
             }
 
             case GAME_OVER -> {
-                view.displayMessage("Fin du jeu Tic Tac Toe !");
                 view.displayBoard(game.board);
             }
         }

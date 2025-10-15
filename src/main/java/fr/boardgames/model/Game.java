@@ -1,6 +1,8 @@
-package org.boardgames.model;
+package fr.boardgames.model;
 
-import org.boardgames.model.player.Player;
+import fr.boardgames.model.player.Player;
+import fr.boardgames.model.state.GameState;
+import fr.boardgames.model.state.GameStateVisitor;
 
 public abstract class Game {
     public Cell[][] board;
@@ -14,6 +16,10 @@ public abstract class Game {
         this.currentPlayer = player1;
         this.board = new Cell[size][size];
         initializeBoard();
+    }
+
+    public void accept(GameStateVisitor visitor) {
+        visitor.visit(this);
     }
 
     public void initializeBoard() {
@@ -56,4 +62,8 @@ public abstract class Game {
             currentPlayer = player1;
         }
     }
+
+    public abstract GameState getState();
+
+    public abstract boolean isGameOver();
 }

@@ -1,7 +1,7 @@
-package org.boardgames.model.tictactoe;
+package fr.boardgames.model.tictactoe;
 
-import org.boardgames.model.Game;
-import org.boardgames.model.player.Player;
+import fr.boardgames.model.Game;
+import fr.boardgames.model.player.Player;
 
 public class TicTacToe extends Game {
     protected TicTacToeState state;
@@ -59,6 +59,12 @@ public class TicTacToe extends Game {
         return false;
     }
 
+    @Override
+    public boolean isGameOver() {
+        return state == TicTacToeState.GAME_OVER;
+    }
+
+    @Override
     public TicTacToeState getState() {
         return state;
     }

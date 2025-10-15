@@ -11,7 +11,7 @@ Bibliothèque de jeux de plateau implémentée en Java
 ## Installation
 1. Cloner le dépôt
 2. Compiler : `javac src/org/boardgames/Main.java`
-3. Exécuter : `java org.boardgames.Main`
+3. Exécuter : `java fr.boardgames.Main`
 
 ## Architecture
 - `Game.java` : Classe abstraite parent
