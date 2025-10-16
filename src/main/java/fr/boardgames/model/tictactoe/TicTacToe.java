@@ -6,7 +6,7 @@ import fr.boardgames.model.player.Player;
 public class TicTacToe extends Game {
     private TicTacToeState state;
 
-    public TicTacToe(int size, Player player1, Player player2) {
+    public TicTacToe(int[] size, Player player1, Player player2) {
         super(size, player1, player2);
         this.state = TicTacToeState.INIT;
         initializeBoard();
@@ -17,9 +17,9 @@ public class TicTacToe extends Game {
         String symbol = player.getSymbol();
 
         // lignes
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < size[0]; i++) {
             boolean rowWin = true;
-            for (int j = 0; j < board.length; j++) {
+            for (int j = 0; j < size[1]; j++) {
                 if (!board[i][j].getSymbol().equals(symbol)) {
                     rowWin = false;
                     break;
@@ -28,9 +28,9 @@ public class TicTacToe extends Game {
         }
 
         // colonnes
-        for (int j = 0; j < board.length; j++) {
+        for (int j = 0; j < size[1]; j++) {
             boolean colWin = true;
-            for (int i = 0; i < board.length; i++) {
+            for (int i = 0; i < size[0]; i++) {
                 if (!board[i][j].getSymbol().equals(symbol)) {
                     colWin = false;
                     break;
@@ -40,7 +40,7 @@ public class TicTacToe extends Game {
 
         // diagonale droite (haut-gauche → bas-droit)
         boolean diag1Win = true;
-        for (int i = 0; i < board.length; i++) {
+        for (int i = 0; i < size[0]; i++) {
             if (!board[i][i].getSymbol().equals(symbol)) {
                 diag1Win = false;
                 break;
@@ -49,8 +49,8 @@ public class TicTacToe extends Game {
 
         // diagonale gauche (haut-droit → bas-gauche)
         boolean diag2Win = true;
-        for (int i = 0; i < board.length; i++) {
-            if (!board[i][board.length - 1 - i].getSymbol().equals(symbol)) {
+        for (int i = 0; i < size[0]; i++) {
+            if (!board[i][size[0] - 1 - i].getSymbol().equals(symbol)) {
                 diag2Win = false;
                 break;
             }

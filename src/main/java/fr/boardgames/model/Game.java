@@ -4,13 +4,14 @@ import fr.boardgames.model.player.Player;
 import fr.boardgames.model.state.GameStateVisitor;
 
 public abstract class Game {
+    protected int[] size;
     public Cell[][] board;
     private Player player1;
     private Player player2;
     public Player currentPlayer;
 
-    public Game(int size, Player player1, Player player2) {
-        this.board = new Cell[size][size];
+    public Game(int[] size, Player player1, Player player2) {
+        this.board = new Cell[size[0]][size[1]];
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
