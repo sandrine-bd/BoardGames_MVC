@@ -27,15 +27,15 @@ public class Main {
 
         switch (gameChoice) {
             case 1 -> {
-                game = new TicTacToe(new int[]{3,3}, players[0], players[1]);
+                game = new TicTacToe(players[0], players[1]); // 3x3, 3 alignés
                 visitor = new TicTacToeVisitor(view, ui);
             }
             case 2 -> {
-                game = new Gomoku(new int[]{15,15}, players[0], players[1]);
+                game = new Gomoku(players[0], players[1]); // 15x15, 5 alignés
                 visitor = new GomokuVisitor(view, ui);
             }
             case 3 -> {
-                game = new Puissance4(new int[]{6,7}, players[0], players[1]);
+                game = new Puissance4(players[0], players[1]); // 6x7, 4 alignés
                 visitor = new Puissance4Visitor(view, ui);
             }
             default -> throw new IllegalArgumentException("Jeu inconnu");

@@ -1,6 +1,7 @@
 package fr.boardgames.model.game;
 
 import fr.boardgames.model.player.Player;
+import fr.boardgames.model.strategy.WinStrategy;
 
 public abstract class Game {
     protected int[] size;
@@ -8,12 +9,15 @@ public abstract class Game {
     private Player player1;
     private Player player2;
     public Player currentPlayer;
+    protected WinStrategy winStrategy;
 
-    public Game(int[] size, Player player1, Player player2) {
+    public Game(int[] size, Player player1, Player player2, WinStrategy winStrategy) {
+        this.size = size;
         this.board = new Cell[size[0]][size[1]];
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
+        this.winStrategy = winStrategy;
         initializeBoard();
     }
 
@@ -23,6 +27,18 @@ public abstract class Game {
                 board[i][j] = new Cell();
             }
         }
+    }
+
+    // Délégation de la stratégie
+    public boolean isWinner(Player player) {
+        return winStrategy.checkWin(this, player);
+    }
+
+    public abstract boolean isGameOver();
+
+    // Pattern Visitor
+    public void accept(GameStateVisitor visitor) {
+        visitor.visit(this);
     }
 
     // Méthodes utilitaires communes
@@ -44,19 +60,17 @@ public abstract class Game {
                     return false;
                 }
             }
-        } return true;
+        }
+        return true;
     }
 
     public void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-    // Méthodes commune
-    public abstract boolean isWinner(Player player);
-    public abstract boolean isGameOver();
-
-    // Pattern Visitor
-    public void accept(GameStateVisitor visitor) {
-        visitor.visit(this);
-    }
+    // Getters
+    public Player getPlayer1() { return player1; }
+    public Player getPlayer2() { return player2; }
+    public int getRows() { return board.length; }
+    public int getCols() { return board[0].length; }
 }
