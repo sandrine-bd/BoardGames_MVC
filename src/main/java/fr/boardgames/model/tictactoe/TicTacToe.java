@@ -4,7 +4,7 @@ import fr.boardgames.model.Game;
 import fr.boardgames.model.player.Player;
 
 public class TicTacToe extends Game {
-    protected TicTacToeState state;
+    private TicTacToeState state;
 
     public TicTacToe(int size, Player player1, Player player2) {
         super(size, player1, player2);
@@ -64,7 +64,6 @@ public class TicTacToe extends Game {
         return state == TicTacToeState.GAME_OVER;
     }
 
-    @Override
     public TicTacToeState getState() {
         return state;
     }

@@ -1,7 +1,6 @@
 package fr.boardgames.model;
 
 import fr.boardgames.model.player.Player;
-import fr.boardgames.model.state.GameState;
 import fr.boardgames.model.state.GameStateVisitor;
 
 public abstract class Game {
@@ -11,15 +10,11 @@ public abstract class Game {
     public Player currentPlayer;
 
     public Game(int size, Player player1, Player player2) {
+        this.board = new Cell[size][size];
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
-        this.board = new Cell[size][size];
         initializeBoard();
-    }
-
-    public void accept(GameStateVisitor visitor) {
-        visitor.visit(this);
     }
 
     public void initializeBoard() {
@@ -30,10 +25,7 @@ public abstract class Game {
         }
     }
 
-    public void setOwner(int row, int col, Player player) {
-        board[row][col].setState(player.getSymbol());
-    }
-
+    // Méthodes utilitaires communes
     public boolean isCellEmpty(int row, int col) {
         if (row < 0 || row >= board.length || col < 0 || col >= board.length) {
             throw new IllegalArgumentException("Coordonnées hors du plateau !");
@@ -41,8 +33,8 @@ public abstract class Game {
         return board[row][col].isEmpty(); // renvoie true si la case ne contient pas de symbole
     }
 
-    public boolean isWinner(Player player) {
-        return false;
+    public void setOwner(int row, int col, Player player) {
+        board[row][col].setState(player.getSymbol());
     }
 
     public boolean isBoardFull() {
@@ -56,14 +48,15 @@ public abstract class Game {
     }
 
     public void switchPlayer() {
-        if (currentPlayer == player1) {
-            currentPlayer = player2;
-        } else {
-            currentPlayer = player1;
-        }
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-    public abstract GameState getState();
-
+    // Méthodes commune
+    public abstract boolean isWinner(Player player);
     public abstract boolean isGameOver();
+
+    // Pattern Visitor
+    public void accept(GameStateVisitor visitor) {
+        visitor.visit(this);
+    }
 }
