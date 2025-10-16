@@ -12,7 +12,7 @@ public interface Persistence {
     void saveGame(Game game, String filename) throws IOException;
     Game loadGame(String filename) throws IOException, ClassNotFoundException;
     List<String> listSavedGames() throws IOException;
-    boolean deteleSavedGame(String filename) throws IOException;
+    boolean deleteSavedGame(String filename) throws IOException;
 
     // Sauvegarde et chargement des statistiques joueurs
     void savePlayerStats(PlayerStats stats, String playerName) throws IOException;
