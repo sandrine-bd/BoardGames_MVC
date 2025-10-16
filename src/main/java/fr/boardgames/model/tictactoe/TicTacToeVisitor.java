@@ -1,7 +1,7 @@
 package fr.boardgames.model.tictactoe;
 
-import fr.boardgames.model.Game;
-import fr.boardgames.model.state.GameStateVisitor;
+import fr.boardgames.model.game.Game;
+import fr.boardgames.model.game.GameStateVisitor;
 import fr.boardgames.view.ConsoleView;
 import fr.boardgames.view.UserInteraction;
 

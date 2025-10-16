@@ -1,6 +1,6 @@
 package fr.boardgames.model.gomoku;
 
-import fr.boardgames.model.Game;
+import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 
 public class Gomoku extends Game {

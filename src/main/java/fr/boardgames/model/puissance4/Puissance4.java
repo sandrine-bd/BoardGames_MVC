@@ -1,6 +1,6 @@
 package fr.boardgames.model.puissance4;
 
-import fr.boardgames.model.Game;
+import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 
 public class Puissance4 extends Game {

@@ -1,6 +1,6 @@
 package fr.boardgames.view;
 
-import fr.boardgames.model.Game;
+import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.ArtificialPlayer;
 import fr.boardgames.model.player.HumanPlayer;
 import fr.boardgames.model.player.Player;
@@ -10,6 +10,28 @@ import java.util.Scanner;
 
 public class UserInteraction {
     private final Scanner sc = new Scanner(System.in);
+
+    public int chooseGame() {
+        System.out.println("\n---- CHOIX DE JEU ----");
+        System.out.println("1. Tic Tac Toe");
+        System.out.println("2. Gomoku");
+        System.out.println("3. Puissance 4");
+        System.out.print("Votre choix : ");
+
+        int choice = 0;
+        while (choice < 1 || choice > 3) {
+            if (!sc.hasNextInt()){
+                System.out.println("Erreur : vous devez entrer un nombre entre 1 et 3 !");
+                sc.next();
+                continue;
+            }
+            choice = sc.nextInt();
+            if (choice < 1 || choice > 3) {
+                System.out.println("Erreur : le choix doit être 1, 2 ou 3 !");
+            }
+        }
+        return choice;
+    }
 
     public int setUpGameMode() {
         System.out.println("\n---- MODE DE JEU ----");

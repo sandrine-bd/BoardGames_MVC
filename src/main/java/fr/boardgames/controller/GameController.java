@@ -1,7 +1,7 @@
 package fr.boardgames.controller;
 
-import fr.boardgames.model.Game;
-import fr.boardgames.model.state.GameStateVisitor;
+import fr.boardgames.model.game.Game;
+import fr.boardgames.model.game.GameStateVisitor;
 
 public class GameController {
     private final Game game;

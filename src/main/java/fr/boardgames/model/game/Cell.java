@@ -1,4 +1,4 @@
-package fr.boardgames.model;
+package fr.boardgames.model.game;
 
 public class Cell {
     private String state;

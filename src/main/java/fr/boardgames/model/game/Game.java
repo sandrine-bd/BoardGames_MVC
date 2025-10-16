@@ -1,7 +1,6 @@
-package fr.boardgames.model;
+package fr.boardgames.model.game;
 
 import fr.boardgames.model.player.Player;
-import fr.boardgames.model.state.GameStateVisitor;
 
 public abstract class Game {
     protected int[] size;

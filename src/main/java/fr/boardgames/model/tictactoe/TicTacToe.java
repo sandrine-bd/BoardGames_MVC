@@ -1,6 +1,6 @@
 package fr.boardgames.model.tictactoe;
 
-import fr.boardgames.model.Game;
+import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 
 public class TicTacToe extends Game {

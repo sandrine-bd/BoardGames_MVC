@@ -1,6 +1,6 @@
 package fr.boardgames.view;
 
-import fr.boardgames.model.Cell;
+import fr.boardgames.model.game.Cell;
 
 public class ConsoleView {
     public void displayBoard(Cell[][] board) {
