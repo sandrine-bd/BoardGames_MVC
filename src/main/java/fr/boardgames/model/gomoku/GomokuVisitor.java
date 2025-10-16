@@ -27,7 +27,7 @@ public class GomokuVisitor implements GameStateVisitor {
 
             case PLAYER_TURN -> {
                 view.displayBoard(gomoku.board);
-                view.displayMessage("\n---- TOUR DU JOUEUR " + gomoku.currentPlayer.getSymbol() + "----");
+                view.displayMessage("\n=== TOUR DU JOUEUR " + gomoku.currentPlayer.getSymbol() + "===");
 
                 int[] move = ui.getMoveFromPlayer(gomoku, gomoku.currentPlayer);
 
@@ -54,7 +54,7 @@ public class GomokuVisitor implements GameStateVisitor {
 
             case GAME_OVER -> {
                 view.displayBoard(game.board);
-                view.displayMessage("\n---- FIN DU GOMOKU ----");
+                view.displayMessage("\nFIN DU GOMOKU");
             }
         }
     }

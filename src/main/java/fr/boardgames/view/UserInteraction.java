@@ -16,10 +16,10 @@ public class UserInteraction {
     }
 
     public int chooseGame() {
-        System.out.println("\n---- CHOIX DE JEU ----");
+        System.out.println("\n=== CHOIX DE JEU ===");
         System.out.println("1. Tic Tac Toe (3x3)");
         System.out.println("2. Gomoku (15x15)");
-        System.out.println("3. Puissance 4 (6x7");
+        System.out.println("3. Puissance 4 (6x7)");
         System.out.print("Votre choix : ");
 
         int choice = 0;
@@ -38,7 +38,7 @@ public class UserInteraction {
     }
 
     public int setUpGameMode() {
-        System.out.println("\n---- MODE DE JEU ----");
+        System.out.println("\n=== MODE DE JEU ===");
         System.out.println("1. Deux joueurs humains");
         System.out.println("2. Un humain et un joueur artificiel");
         System.out.println("3. Deux joueurs artificiels");

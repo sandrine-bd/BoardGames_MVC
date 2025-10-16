@@ -27,7 +27,7 @@ public class Puissance4Visitor implements GameStateVisitor {
 
             case PLAYER_TURN -> {
                 view.displayBoard(puissance4.board);
-                view.displayMessage("\n---- TOUR DU JOUEUR " + puissance4.currentPlayer.getSymbol() + "----");
+                view.displayMessage("\n=== TOUR DU JOUEUR " + puissance4.currentPlayer.getSymbol() + "===");
 
                 int[] move = ui.getMoveFromPlayer(puissance4, puissance4.currentPlayer);
 
@@ -54,7 +54,7 @@ public class Puissance4Visitor implements GameStateVisitor {
 
             case GAME_OVER -> {
                 view.displayBoard(game.board);
-                view.displayMessage("\n---- FIN DU PUISSANCE 4 ----");
+                view.displayMessage("\nFIN DU PUISSANCE 4");
             }
         }
     }

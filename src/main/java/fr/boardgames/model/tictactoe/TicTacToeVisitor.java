@@ -27,7 +27,7 @@ public class TicTacToeVisitor implements GameStateVisitor {
 
             case PLAYER_TURN -> {
                 view.displayBoard(ticTacToe.board);
-                view.displayMessage("\n---- TOUR DU JOUEUR " + ticTacToe.currentPlayer.getSymbol() + "----");
+                view.displayMessage("\n=== TOUR DU JOUEUR " + ticTacToe.currentPlayer.getSymbol() + "===");
 
                 int[] move = ui.getMoveFromPlayer(ticTacToe, ticTacToe.currentPlayer);
 
@@ -54,7 +54,7 @@ public class TicTacToeVisitor implements GameStateVisitor {
 
             case GAME_OVER -> {
                 view.displayBoard(game.board);
-                view.displayMessage("\n---- FIN DU TIC TAC TOE ----");
+                view.displayMessage("\n=== FIN DU TIC TAC TOE ===");
             }
         }
     }
