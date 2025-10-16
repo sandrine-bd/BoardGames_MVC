@@ -9,13 +9,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class UserInteraction {
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc;
+
+    public UserInteraction() {
+        this.sc = new Scanner(System.in);
+    }
 
     public int chooseGame() {
         System.out.println("\n---- CHOIX DE JEU ----");
-        System.out.println("1. Tic Tac Toe");
-        System.out.println("2. Gomoku");
-        System.out.println("3. Puissance 4");
+        System.out.println("1. Tic Tac Toe (3x3)");
+        System.out.println("2. Gomoku (15x15)");
+        System.out.println("3. Puissance 4 (6x7");
         System.out.print("Votre choix : ");
 
         int choice = 0;
@@ -83,7 +87,7 @@ public class UserInteraction {
 
     public int[] getMoveFromPlayer(Game game, Player player) {
         if (player instanceof HumanPlayer) {
-            return askCellChoice();
+            return askCellChoice(game);
         } else {
             Random rand = new Random();
             int row, col;
@@ -97,8 +101,10 @@ public class UserInteraction {
         }
     }
 
-    public int[] askCellChoice() {
-        int row, col;
+    public int[] askCellChoice(Game game) {
+        int rows = game.getRows();
+        int cols = game.getCols();
+
         while (true) {
             System.out.print("Entrez le numéro de ligne (entre 0 et 2) : ");
             if (!sc.hasNextInt()) {
@@ -106,7 +112,7 @@ public class UserInteraction {
                 sc.next();
                 continue;
             }
-            row = sc.nextInt();
+            int row = sc.nextInt();
 
             System.out.print("Entrez le numéro de colonne (entre 0 et 2) : ");
             if (!sc.hasNextInt()) {
@@ -114,14 +120,19 @@ public class UserInteraction {
                 sc.next();
                 continue;
             }
-            col = sc.nextInt();
+            int col = sc.nextInt();
 
-            if (row < 0 || col < 0 || row >= 3 || col >= 3) {
+            if (row < 0 || col < 0 || row >= rows || col >= cols) {
                 System.out.println("Erreur : coordonnées hors du plateau !");
                 continue;
             }
 
             return new int[] {row, col};
         }
+    }
+
+    // Fermer le scanner
+    public void close() {
+        sc.close();
     }
 }

@@ -21,12 +21,14 @@ public class GomokuVisitor implements GameStateVisitor {
         switch (gomoku.getState()) {
             case INIT -> {
                 view.displayMessage("\nDÉMARRAGE DU JEU GOMOKU");
+                view.displayMessage("Plateau 15x15 - Alignez exactement 5 pièces pour gagner !");
                 gomoku.setState(GomokuState.PLAYER_TURN);
             }
 
             case PLAYER_TURN -> {
                 view.displayBoard(gomoku.board);
                 view.displayMessage("\n---- TOUR DU JOUEUR " + gomoku.currentPlayer.getSymbol() + "----");
+
                 int[] move = ui.getMoveFromPlayer(gomoku, gomoku.currentPlayer);
 
                 if (gomoku.isCellEmpty(move[0], move[1])) {
@@ -52,6 +54,7 @@ public class GomokuVisitor implements GameStateVisitor {
 
             case GAME_OVER -> {
                 view.displayBoard(game.board);
+                view.displayMessage("\n---- FIN DU GOMOKU ----");
             }
         }
     }

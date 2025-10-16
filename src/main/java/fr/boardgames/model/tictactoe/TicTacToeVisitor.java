@@ -21,12 +21,14 @@ public class TicTacToeVisitor implements GameStateVisitor {
         switch (ticTacToe.getState()) {
             case INIT -> {
                 view.displayMessage("\nDÉMARRAGE DU JEU DE TIC TAC TOE");
+                view.displayMessage("Plateau 3x3 - Alignez 3 symboles pour gagner !");
                 ticTacToe.setState(TicTacToeState.PLAYER_TURN);
             }
 
             case PLAYER_TURN -> {
                 view.displayBoard(ticTacToe.board);
                 view.displayMessage("\n---- TOUR DU JOUEUR " + ticTacToe.currentPlayer.getSymbol() + "----");
+
                 int[] move = ui.getMoveFromPlayer(ticTacToe, ticTacToe.currentPlayer);
 
                 if (ticTacToe.isCellEmpty(move[0], move[1])) {
@@ -52,6 +54,7 @@ public class TicTacToeVisitor implements GameStateVisitor {
 
             case GAME_OVER -> {
                 view.displayBoard(game.board);
+                view.displayMessage("\n---- FIN DU TIC TAC TOE ----");
             }
         }
     }
