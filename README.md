@@ -10,17 +10,13 @@ Bibliothèque de jeux de plateau implémentée en Java
 
 ## Installation
 1. Cloner le dépôt
-2. Compiler : `javac src/org/boardgames/Main.java`
+2. Compiler : `javac src/main/java/fr/boardgames/Main.java`
 3. Exécuter : `java fr.boardgames.Main`
 
 ## Architecture
 - `Game.java` : Classe abstraite parent
 - `TicTacToe.java` : Implémentation Tic Tac Toe
 - ...
-
-## Auteurs
-- Votre Nom
-- Nom du Binôme
 
 ## Licence
 Projet pédagogique
