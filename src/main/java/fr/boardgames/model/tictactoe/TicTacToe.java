@@ -3,8 +3,14 @@ package fr.boardgames.model.tictactoe;
 import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 import fr.boardgames.model.strategy.ThreeInRowStrategy;
+import fr.boardgames.model.strategy.WinStrategy;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class TicTacToe extends Game {
+    private static final long serialVersionUID = 1L;
+
     private TicTacToeState state;
 
     public TicTacToe(Player player1, Player player2) {
@@ -16,6 +22,17 @@ public class TicTacToe extends Game {
     @Override
     public boolean isGameOver() {
         return state == TicTacToeState.GAME_OVER;
+    }
+
+    @Override
+    protected void reinitializeStrategy() {
+        this.winStrategy = new ThreeInRowStrategy();
+    }
+
+    // Méthode appelée après désérialisation
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        reinitializeStrategy();
     }
 
     public TicTacToeState getState() {

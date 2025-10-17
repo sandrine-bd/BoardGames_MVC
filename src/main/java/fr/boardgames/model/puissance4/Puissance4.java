@@ -32,7 +32,7 @@ public class Puissance4 extends Game {
         // on ignore row
         for (int r = size[0] - 1 ; r >= 0; r--) { // on part dans la colonne du bas vers le haut
             if (board[r][col].isEmpty()) { // cherche la 1ère case vide
-                board[r][col].setState(player.getSymbol()); // on pose le pion
+                board[r][col].setSymbol(player.getSymbol()); // on pose le pion
                 return;
             }
         }

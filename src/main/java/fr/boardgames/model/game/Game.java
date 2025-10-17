@@ -61,7 +61,7 @@ public abstract class Game implements Serializable {
     }
 
     public void setOwner(int row, int col, Player player) {
-        board[row][col].setState(player.getSymbol());
+        board[row][col].setSymbol(player.getSymbol());
     }
 
     public boolean isBoardFull() {

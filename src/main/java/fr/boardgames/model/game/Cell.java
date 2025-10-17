@@ -1,20 +1,28 @@
 package fr.boardgames.model.game;
 
-public class Cell {
-    private String state;
+import java.io.Serializable;
 
-    public Cell() { this.state = "   "; }
+public class Cell implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String symbol;
+
+    public Cell() { this.symbol = "   "; }
 
     public boolean isEmpty() {
-        return state.equals("   ");
-    }
-
-    public void setState(String state) {
-        this.state = state;
+        return symbol.equals("   ");
     }
 
     public String getSymbol() {
-        return state;
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void clear() {
+        this.symbol = "   ";
     }
 
     @Override
