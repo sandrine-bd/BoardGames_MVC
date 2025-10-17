@@ -5,6 +5,9 @@ import fr.boardgames.model.strategy.WinStrategy;
 
 import java.io.Serializable;
 
+/**
+ * Classe abstraite sérializable qui définit la construction d'un jeu
+ */
 public abstract class Game implements Serializable {
     private static final long serialVersionUID = 1L;
     protected int[] size;
@@ -17,6 +20,13 @@ public abstract class Game implements Serializable {
     private long startTime;
     private int moveCount;
 
+    /**
+     * Constructeur utilisant une grille, deux joueurs et la règle pour gagner
+     * @param size taille de la grille du jeu
+     * @param player1 joueur 1
+     * @param player2 joueur 2
+     * @param winStrategy stratégie du jeu choisi
+     */
     public Game(int[] size, Player player1, Player player2, WinStrategy winStrategy) {
         this.size = size;
         this.board = new Cell[size[0]][size[1]];
@@ -29,6 +39,9 @@ public abstract class Game implements Serializable {
         initializeBoard();
     }
 
+    /**
+     * Méthode pour dessiner la grille de jeu
+     */
     public void initializeBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -37,33 +50,63 @@ public abstract class Game implements Serializable {
         }
     }
 
-    // Délégation de la stratégie
+    /**
+     * Méthode pour savoir si le joueur est gagnant
+     * @param player
+     * @return boolean
+     */
     public boolean isWinner(Player player) {
         return winStrategy.checkWin(this, player);
     }
 
+    /**
+     * Méthode pour savoir si le jeu est terminé
+     * @return boolean
+     */
     public abstract boolean isGameOver();
 
-    // Pattern Visitor
+    /**
+     * Pattern Visitor
+     * @param visitor
+     */
     public void accept(GameStateVisitor visitor) {
         visitor.visit(this);
     }
 
-    // Méthode appelée après désérialisation
+    /**
+     * Méthode appelée après désérialisation pour réinitialiser le jeu
+     */
     protected abstract void reinitializeStrategy();
 
-    // Méthodes utilitaires
+    // ========== METHODES UTILITAIRES ==========
+
+    /**
+     * Vérifie si la case est vide
+     * @param row = numéro de ligne
+     * @param col = numéro de colonne
+     * @return true si la case ne contient pas de symbole
+     */
     public boolean isCellEmpty(int row, int col) {
         if (row < 0 || row >= board.length || col < 0 || col >= board.length) {
             throw new IllegalArgumentException("Coordonnées hors du plateau !");
         }
-        return board[row][col].isEmpty(); // renvoie true si la case ne contient pas de symbole
+        return board[row][col].isEmpty();
     }
 
+    /**
+     * Dessine le symbole du joueur qui vient de jouer
+     * @param row numéro de ligne choisie par le joueur
+     * @param col numéro de colonne choisie par le joueur
+     * @param player le joueur en cours
+     */
     public void setOwner(int row, int col, Player player) {
         board[row][col].setSymbol(player.getSymbol());
     }
 
+    /**
+     * Vérifie si la grille de jeu est remplie à 100%
+     * @return vrai si la grille est pleine
+     */
     public boolean isBoardFull() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -75,6 +118,9 @@ public abstract class Game implements Serializable {
         return true;
     }
 
+    /**
+     * Change de joueur à la fin d'un tour
+     */
     public void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }

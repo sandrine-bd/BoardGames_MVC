@@ -7,6 +7,9 @@ import fr.boardgames.model.strategy.ThreeInRowStrategy;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * Règles du jeu Tic Tac Toe
+ */
 public class TicTacToe extends Game {
     private static final long serialVersionUID = 1L;
 
@@ -18,11 +21,17 @@ public class TicTacToe extends Game {
         initializeBoard();
     }
 
+    /**
+     * Vérifie si le jeu est terminé
+     * @return l'état du jeu "Game Over"
+     */
     @Override
     public boolean isGameOver() {
         return state == TicTacToeState.GAME_OVER;
     }
-
+    /**
+     * Initialise le jeu avec la stratégie du Tic Tac Toe (3 cases à aligner)
+     */
     @Override
     protected void reinitializeStrategy() {
         this.winStrategy = new ThreeInRowStrategy();
@@ -34,10 +43,11 @@ public class TicTacToe extends Game {
         reinitializeStrategy();
     }
 
+    // Getter
     public TicTacToeState getState() {
         return state;
     }
-
+    // Setter
     public void setState(TicTacToeState state) {
         this.state = state;
     }

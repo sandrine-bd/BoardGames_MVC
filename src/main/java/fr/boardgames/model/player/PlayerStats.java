@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe sérializable pour enregistrer les stats de chaque joueur
+ */
 public class PlayerStats implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -12,6 +15,10 @@ public class PlayerStats implements Serializable {
     private long totalPlayTime; // en millisecondes
     private long lastPlayedTimestamp;
 
+    /**
+     * Constructeur avec le nom du joueur, ses stats par jeu, son temps total de jeu, et la dernière fois qu'il a joué
+     * @param playerName nom défini dans UserInteraction
+     */
     public PlayerStats(String playerName) {
         this.playerName = playerName;
         this.statsByGame = new HashMap<>();
@@ -19,21 +26,28 @@ public class PlayerStats implements Serializable {
         this.lastPlayedTimestamp = System.currentTimeMillis();
     }
 
+    /**
+     * Enregistre le nombre de fois où le joueur a gagné
+     * @param gameType
+     */
     public void recordWin(String gameType) {
         getOrCreateStats(gameType).recordWin();
         updateLastPlayed();
     }
 
+    /**
+     * Enregistre le nombre de fois où le joueur a perdu
+     * @param gameType
+     */
     public void recordLoss(String gameType) {
         getOrCreateStats(gameType).recordLoss();
         updateLastPlayed();
     }
 
-    public void recordDraw(String gameType) {
-        getOrCreateStats(gameType).recordDraw();
-        updateLastPlayed();
-    }
-
+    /**
+     * Compte le temps total de jeu en millisecondes
+     * @param milliseconds
+     */
     public void addPlayTime(long milliseconds) {
         this.totalPlayTime += milliseconds;
     }
@@ -53,40 +67,41 @@ public class PlayerStats implements Serializable {
     public long getLastPlayedTimestamp() { return lastPlayedTimestamp; }
     public int getTotalWins() { return statsByGame.values().stream().mapToInt(GameStats::getWins).sum(); }
     public int getTotalLosses() { return statsByGame.values().stream().mapToInt(GameStats::getLosses).sum(); }
-    public int getTotalDraws() { return statsByGame.values().stream().mapToInt(GameStats::getDraws).sum(); }
     public double getWinRate() {
-        int total = getTotalWins() + getTotalLosses() + getTotalDraws();
+        int total = getTotalWins() + getTotalLosses();
         return total == 0 ? 0.0 : (double) getTotalWins() / total * 100;
     }
 
+    /**
+     * Affiche le nom du joueur, son nombre de victoires et défaites, son taux de réussite
+     * @return
+     */
     @Override
     public String toString() {
-        return String.format("Joueur : %s | Victoires : %d | Défaites : %d | Nombre de coups : %d | Taux de réussite : %.1f%%",
-        playerName, getTotalWins(), getTotalLosses(), getTotalDraws(), getWinRate());
+        return String.format("Joueur : %s | Victoires : %d | Défaites : %d | Taux de réussite : %.1f%%",
+        playerName, getTotalWins(), getTotalLosses(), getWinRate());
     }
 
-    // Classe interne pour les stats par jeu
+    /**
+     * Classe interne pour les stats par jeu
+     */
     public static class GameStats implements Serializable {
         private static final long serialVersionUID = 1L;
 
         private int wins;
         private int losses;
-        private int draws;
 
         public GameStats() {
             this.wins = 0;
             this.losses = 0;
-            this.draws = 0;
         }
 
         public void recordWin() { wins++; }
         public void recordLoss() { losses++; }
-        public void recordDraw() { draws++; }
 
         public int getWins() { return wins; }
         public int getLosses() { return losses; }
-        public int getDraws() { return draws; }
-        public int getTotalGames() { return wins + losses + draws; }
+        public int getTotalGames() { return wins + losses; }
 
         public double getWinRate() {
             int total = getTotalGames();

@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Classe de sérialization avec toutes les méthodes de sauvegarde et chargement des données des jeux
+ */
+
 public class GameSerialization implements Persistence {
 
     private static final String SAVES_DIRECTORY = "saves/";
@@ -21,6 +25,9 @@ public class GameSerialization implements Persistence {
     private static final String GAME_EXTENSION = ".game";
     private static final String STATS_EXTENSION = ".stats";
 
+    /**
+     * Constructeur qui crée les dossiers où seront enregistrées les données
+     */
     public GameSerialization() {
         initializeDirectories();
     }
@@ -34,7 +41,7 @@ public class GameSerialization implements Persistence {
         }
     }
 
-    // SAUVEGARDE ET CHARGEMENT DES PARTIES
+    // ====== SAUVEGARDE ET CHARGEMENT DES PARTIES ======
 
     @Override
     public void saveGame(Game game, String filename) throws IOException {
@@ -108,7 +115,7 @@ public class GameSerialization implements Persistence {
         return false;
     }
 
-    // STATISTIQUES JOUEURS
+    // ====== STATISTIQUES JOUEURS ======
 
     @Override
     public void savePlayerStats(PlayerStats stats, String playerName) throws IOException {
@@ -167,7 +174,7 @@ public class GameSerialization implements Persistence {
         return allStats;
     }
 
-    // CONFIGURATION
+    // ====== CONFIGURATION ======
 
     @Override
     public void saveGameConfig(GameConfig config) throws IOException {
@@ -196,16 +203,23 @@ public class GameSerialization implements Persistence {
         }
     }
 
-    // UTILITAIRES
+    // ====== UTILITAIRES ======
 
+    /**
+     * Vérifie si un fichier existe
+     * @param filename nom du fichier
+     * @return le chemin vers le fichier
+     */
     @Override
     public boolean fileExists(String filename) {
         return Files.exists(Paths.get(GAMES_DIRECTORY + filename));
     }
 
+    /**
+     * Supprime toutes les sauvegardes de jeux
+     */
     @Override
     public void clearAllSaves() throws IOException {
-        // Supprime toutes les sauvegardes de jeux
         try (Stream<Path> paths = Files.walk(Paths.get(GAMES_DIRECTORY), 1)) {
             paths.filter(Files::isRegularFile)
                     .forEach(path -> {
@@ -219,8 +233,12 @@ public class GameSerialization implements Persistence {
         System.out.println("Toutes les sauvegardes ont été supprimées");
     }
 
+    /**
+     * Remplace les caractères invalides par des underscores
+     * @param filename
+     * @return
+     */
     private String sanitizeFilename(String filename) {
-        // Remplace les caractères invalides par des underscores
         return filename.replaceAll("[^a-zA-Z0-9.-]", "_");
     }
 }

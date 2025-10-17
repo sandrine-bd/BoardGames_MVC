@@ -8,13 +8,23 @@ import fr.boardgames.model.player.Player;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe dédiée aux interactions avec le joueur
+ */
 public class UserInteraction {
     private final Scanner sc;
 
+    /**
+     * Constructeur qui crée un nouveau Scanner
+     */
     public UserInteraction() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Choix du jeu
+     * @return un chiffre de 1 à 3
+     */
     public int chooseGame() {
         System.out.println("\n=== CHOIX DE JEU ===");
         System.out.println("1. Tic Tac Toe (3x3)");
@@ -37,6 +47,10 @@ public class UserInteraction {
         return choice;
     }
 
+    /**
+     * Choix du mode de jeu
+     * @return un chiffre entre 1 et 3
+     */
     public int setUpGameMode() {
         System.out.println("\n=== MODE DE JEU ===");
         System.out.println("1. Deux joueurs humains");
@@ -59,6 +73,11 @@ public class UserInteraction {
         return choice;
     }
 
+    /**
+     * Création des joueurs en fonction du choix de mode de jeu
+     * @param mode choisi par le joueur (chiffre entre 1 et 3)
+     * @return un tableau de 2 joueurs
+     */
     public Player[] setUpPlayers(int mode) {
         Player player1;
         Player player2;
@@ -85,6 +104,12 @@ public class UserInteraction {
         return new Player[]{player1, player2};
     }
 
+    /**
+     * Enregistre le choix de case du joueur, qu'il soit humain ou artificiel
+     * @param game jeu en cours
+     * @param player joueur en cours
+     * @return tableau de 2 coordonnées : numéro de colonne et numéro de ligne
+     */
     public int[] getMoveFromPlayer(Game game, Player player) {
         if (player instanceof HumanPlayer) {
             return askCellChoice(game);
@@ -101,12 +126,17 @@ public class UserInteraction {
         }
     }
 
+    /**
+     * Le joueur choisit la case sur laquelle il veut jouer
+     * @param game jeu en cours
+     * @return tableau de 2 coordonnées : numéro de colonne et numéro de ligne
+     */
     public int[] askCellChoice(Game game) {
         int rows = game.getRows();
         int cols = game.getCols();
 
         while (true) {
-            System.out.print("Entrez le numéro de ligne (entre 0 et 2) : ");
+            System.out.print("Entrez le numéro de ligne (entre 0 et " + (rows - 1) + ") : ");
             if (!sc.hasNextInt()) {
                 System.out.println("Erreur : entrez un nombre !");
                 sc.next();
@@ -114,7 +144,7 @@ public class UserInteraction {
             }
             int row = sc.nextInt();
 
-            System.out.print("Entrez le numéro de colonne (entre 0 et 2) : ");
+            System.out.print("Entrez le numéro de colonne (entre 0 et " + (cols - 1) + ") : ");
             if (!sc.hasNextInt()) {
                 System.out.println("Erreur : entrez un nombre !");
                 sc.next();
@@ -131,7 +161,9 @@ public class UserInteraction {
         }
     }
 
-    // Fermer le scanner
+    /**
+     * Ferme le scanner
+     */
     public void close() {
         sc.close();
     }

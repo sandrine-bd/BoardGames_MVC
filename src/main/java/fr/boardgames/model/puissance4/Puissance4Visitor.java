@@ -5,15 +5,27 @@ import fr.boardgames.model.game.GameStateVisitor;
 import fr.boardgames.view.ConsoleView;
 import fr.boardgames.view.UserInteraction;
 
+/**
+ * Visiteur spécifique au Puissance 4
+ */
 public class Puissance4Visitor implements GameStateVisitor {
     private final ConsoleView view;
     private final UserInteraction ui;
 
+    /**
+     * Constructeur
+     * @param view affichage du jeu
+     * @param ui interaction avec le joueur
+     */
     public Puissance4Visitor(ConsoleView view, UserInteraction ui) {
         this.view = view;
         this.ui = ui;
     }
 
+    /**
+     * Déroulé du jeu Puissance 4 en fonction de ses états
+     * @param game jeu choisi par le joueur
+     */
     @Override
     public void visit(Game game) {
         if (!(game instanceof Puissance4 puissance4)) return;

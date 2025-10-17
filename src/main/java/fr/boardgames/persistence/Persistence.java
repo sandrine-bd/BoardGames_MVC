@@ -6,6 +6,9 @@ import fr.boardgames.model.player.PlayerStats;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Interface qui définit toutes les méthodes nécessaires à la sauvegarde et au chargement des données du jeu
+ */
 public interface Persistence {
 
     // Sauvegarde et chargement des parties

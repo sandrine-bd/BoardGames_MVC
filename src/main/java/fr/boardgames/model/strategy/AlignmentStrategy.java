@@ -4,13 +4,26 @@ import fr.boardgames.model.game.Cell;
 import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 
+/**
+ * Classe qui définit comment chaque jeu peut être gagné
+ */
 public class AlignmentStrategy implements WinStrategy {
     protected final int alignmentNeeded;
 
+    /**
+     * Définit la stratégie gagnante
+     * @param alignmentNeeded nombre de cases à aligner
+     */
     public AlignmentStrategy(int alignmentNeeded) {
         this.alignmentNeeded = alignmentNeeded;
     }
 
+    /**
+     * Méthode qui vérifie à chaque tour si un joueur a gagné
+     * @param game jeu choisi par le joueur
+     * @param player joueur en cours
+     * @return true si la partie est gagnée
+     */
     @Override
     public boolean checkWin(Game game, Player player) {
         String symbol = player.getSymbol();
@@ -114,7 +127,12 @@ public class AlignmentStrategy implements WinStrategy {
         return false;
     }
 
-    // Méthode à surcharger pour Gomoku (exactement 5)
+    /**
+     * Méthode qui compare le nombre de cases alignées par un joueur au nombre de cases définies pour gagner
+     * Méthode à surcharger pour Gomoku (exactement 5)
+     * @param count nombre de cases à aligner pour gagner
+     * @return true si l'alignement est supérieur ou égal à ce nombre
+     */
     protected boolean isWinningAlignment(int count) {
         return count >= alignmentNeeded;
     }
