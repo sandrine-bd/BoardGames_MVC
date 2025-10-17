@@ -65,21 +65,21 @@ public class UserInteraction {
 
         switch (mode) {
             case 1 -> {
-                player1 = new HumanPlayer(" \u001B[36mX\u001B[0m "); // code couleur
-                player2 = new HumanPlayer(" \u001B[35mO\u001B[0m ");
+                player1 = new HumanPlayer("Joueur 1", " \u001B[36mX\u001B[0m "); // code couleur
+                player2 = new HumanPlayer("Joueur 2", " \u001B[35mO\u001B[0m ");
             }
             case 2 -> {
-                player1 = new HumanPlayer(" \u001B[36mX\u001B[0m ");
-                player2 = new ArtificialPlayer(" \u001B[35mO\u001B[0m ");
+                player1 = new HumanPlayer("Joueur 1", " \u001B[36mX\u001B[0m ");
+                player2 = new ArtificialPlayer("Joueur 2", " \u001B[35mO\u001B[0m ");
             }
             case 3 -> {
-                player1 = new ArtificialPlayer(" \u001B[36mX\u001B[0m ");
-                player2 = new ArtificialPlayer(" \u001B[35mO\u001B[0m ");
+                player1 = new ArtificialPlayer("Joueur 1", " \u001B[36mX\u001B[0m ");
+                player2 = new ArtificialPlayer( "Joueur 2", " \u001B[35mO\u001B[0m ");
             }
             default -> {
                 System.out.println("Choix invalide, par défaut : deux joueurs humains.");
-                player1 = new HumanPlayer(" \u001B[36mX\u001B[0m ");
-                player2 = new HumanPlayer(" \u001B[35mO\u001B[0m ");
+                player1 = new HumanPlayer("Joueur 1", " \u001B[36mX\u001B[0m ");
+                player2 = new HumanPlayer("Joueur 2", " \u001B[35mO\u001B[0m ");
             }
         }
         return new Player[]{player1, player2};

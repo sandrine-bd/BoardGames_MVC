@@ -1,8 +1,8 @@
 package fr.boardgames.model.player;
 
 public class ArtificialPlayer extends Player {
-    public ArtificialPlayer(String symbol) {
-        super(symbol);
+    public ArtificialPlayer(String name, String symbol) {
+        super(name, symbol);
     }
 
     @Override
