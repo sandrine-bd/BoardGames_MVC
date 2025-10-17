@@ -3,13 +3,19 @@ package fr.boardgames.model.game;
 import fr.boardgames.model.player.Player;
 import fr.boardgames.model.strategy.WinStrategy;
 
-public abstract class Game {
+import java.io.Serializable;
+
+public abstract class Game implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected int[] size;
     public Cell[][] board;
     private Player player1;
     private Player player2;
     public Player currentPlayer;
-    protected WinStrategy winStrategy;
+    protected transient WinStrategy winStrategy; // transient car la stratégie sera recréée au chargement
+    // métadonnées de la partie
+    private long startTime;
+    private int moveCount;
 
     public Game(int[] size, Player player1, Player player2, WinStrategy winStrategy) {
         this.size = size;
@@ -18,6 +24,8 @@ public abstract class Game {
         this.player2 = player2;
         this.currentPlayer = player1;
         this.winStrategy = winStrategy;
+        this.startTime = System.currentTimeMillis();
+        this.moveCount = 0;
         initializeBoard();
     }
 
@@ -41,7 +49,10 @@ public abstract class Game {
         visitor.visit(this);
     }
 
-    // Méthodes utilitaires communes
+    // Méthode appelée après désérialisation
+    protected abstract void reinitializeStrategy();
+
+    // Méthodes utilitaires
     public boolean isCellEmpty(int row, int col) {
         if (row < 0 || row >= board.length || col < 0 || col >= board.length) {
             throw new IllegalArgumentException("Coordonnées hors du plateau !");
@@ -73,4 +84,7 @@ public abstract class Game {
     public Player getPlayer2() { return player2; }
     public int getRows() { return board.length; }
     public int getCols() { return board[0].length; }
+    public long getStartTime() { return startTime; }
+    public int getMoveCount() { return moveCount; }
+    public long getElapsedTime() { return System.currentTimeMillis() - startTime; }
 }

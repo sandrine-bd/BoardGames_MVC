@@ -198,7 +198,6 @@ public class GameSerialization implements Persistence {
 
     // UTILITAIRES
 
-
     @Override
     public boolean fileExists(String filename) {
         return Files.exists(Paths.get(GAMES_DIRECTORY + filename));
