@@ -3,7 +3,6 @@ package fr.boardgames.model.tictactoe;
 import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 import fr.boardgames.model.strategy.ThreeInRowStrategy;
-import fr.boardgames.model.strategy.WinStrategy;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,8 +29,8 @@ public class TicTacToe extends Game {
     }
 
     // Méthode appelée après désérialisation
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
         reinitializeStrategy();
     }
 

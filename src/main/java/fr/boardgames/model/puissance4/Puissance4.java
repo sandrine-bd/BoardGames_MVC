@@ -4,7 +4,12 @@ import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 import fr.boardgames.model.strategy.FourInRowStrategy;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class Puissance4 extends Game {
+    private static final long serialVersionUID = 1L;
+
     private Puissance4State state;
 
     public Puissance4(Player player1, Player player2) {
@@ -16,6 +21,16 @@ public class Puissance4 extends Game {
     @Override
     public boolean isGameOver() {
         return state == Puissance4State.GAME_OVER;
+    }
+
+    @Override
+    protected void reinitializeStrategy() {
+        this.winStrategy = new FourInRowStrategy();
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        reinitializeStrategy();
     }
 
     public Puissance4State getState() {

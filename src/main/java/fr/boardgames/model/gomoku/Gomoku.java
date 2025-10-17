@@ -4,7 +4,12 @@ import fr.boardgames.model.game.Game;
 import fr.boardgames.model.player.Player;
 import fr.boardgames.model.strategy.FiveInRowStrategy;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class Gomoku extends Game {
+    private static final long serialVersionUID = 1L;
+
     private GomokuState state;
 
     public Gomoku(Player player1, Player player2) {
@@ -16,6 +21,16 @@ public class Gomoku extends Game {
     @Override
     public boolean isGameOver() {
         return state == GomokuState.GAME_OVER;
+    }
+
+    @Override
+    protected void reinitializeStrategy() {
+        this.winStrategy = new FiveInRowStrategy();
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        reinitializeStrategy();
     }
 
     public GomokuState getState() {
