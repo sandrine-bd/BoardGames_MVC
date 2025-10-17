@@ -61,7 +61,7 @@ public class PlayerStats implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Joueur : %s | Victoires : %d | Défaites : %d | N : %d | Taux de réussite : %.1f%%",
+        return String.format("Joueur : %s | Victoires : %d | Défaites : %d | Nombre de coups : %d | Taux de réussite : %.1f%%",
         playerName, getTotalWins(), getTotalLosses(), getTotalDraws(), getWinRate());
     }
 
